@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--suppress ALL -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XTRM_TAXINFO</title>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700%26family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100;1,200;1,300;1,400;1,500;1,600%26family=IBM+Plex+Serif:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700%26display=swap');
+    body {font-family: 'IBM Plex Serif', serif; }
+    h1, h2, h3, h4, h5, h6 {font-family: 'IBM Plex Sans', sans-serif; }
+    h1 { text-align: center;}
+    code, pre, tt { font-family: 'IBM Plex Mono', monospace;}
+    code {
+        display: inline-block;
+        padding: 2px;
+        color: navy;
+        background-color: azure;
+    }
+    tt {
+        padding: 2px;
+        color: navy;
+        background-color: azure;
+    }
+    .flag { font-family: 'IBM Plex Mono', monospace;}
+    .flag::before {
+        display: inline-block;
+        content: " ";
+        margin: 0 .25in 0 0;
+    }
+    .hang {
+        font-family: 'IBM Plex Mono', monospace;
+        text-indent: -3em;
+        padding-left:3em;
+        color: navy;
+    }
+    .hanged {
+        background-color: azure;
+        margin: 0 0 0 3em;
+        padding: 3px;
+    }
+</style>
+</head>
+
+<body>
+<h1>XTRM_TAXINFO</h1>
+<h2>Purpose</h2>
+<p>This is a sample program, intended to demonstrate the XTRM&trade; API for tax information.
+As tax information can contain personal and identifying information as defined by GDPR and
+similar standards, allowing anyone other than the taxpayer or taxpaying entity to access this
+information is problematic.</p>
+<p>XTRM&trade;&rsquo;s solution is to email the tax form, as a PDF, directly
+to the registered email of the taxpayer. The API allows for a company to send tax
+information, without themselves being privy to any information on that tax form.</p>
+<h2>Usage</h2>
+<dl>
+    <dt><code>xtrm-taxinfo</code></dt>
+    <dd><p><code>--debug, -d</code> <i class="flag">optional, default false</i></p>
+        <p>Enable debugging and other error messages.</p>
+    </dd>
+    <dd>
+        <p><code>--manager, -m</code> <b class="flag">mandatory</b></p>
+        <p>The SPN number of the company requesting tax information to be sent</p>
+    </dd>
+    <dd>
+        <p><code>--recipient, -r</code> <b class="flag">mandatory</b></p>
+        <p>The PAT or SPN number of the company to recieve tax information</p>
+    </dd>
+    <dd>
+        <p><code>--taxyear, -t</code> <b class="flag">mandatory</b></p>
+        <p>A four-digit year identifying the tax year for which to send tax information</p>
+    </dd>
+    <dd><p><code>--verbose, -b</code> <i class="flag">optional, default false</i></p>
+        <p>Enable descriptions and other messaging.</p>
+    </dd>
+
+</dl>
+<p>A typical invocation might be:</p>
+<div class="hanged">
+    <!-- &#8209; -- non-breaking hyphen -->
+<p class="hang">xtrm_taxinfo &#8209;&#8209;taxyear&nbsp;2020 &#8209;&#8209;recipient&nbsp;AT12121234 &#8209;&#8209;manager&nbsp;SPN89898912</p>
+</div>
+<h2>Implementation Quirks</h2>
+    <p>Usage of this program requires an API key and API secret for authentication. Secrets may be stored in
+        database, in an <code>.ini</code> file, or in various other ways. This program has a dummy configuration
+        which embeds the secrets directly into the code. The developer will need to make changes only to
+        <code>configSecrets.go</code> to return the secrets to the rest of the program, and may choose whatever
+        level of security seems appropriate for the project.</p>
+
+<h2>Download and running the program</h2>
+<p>As a Go program, this program may be downloaded via github, and run or installed with
+<code>go run</code> or <code>go install</code> executed from the code directory.</p>
+<p>The specific logic of calling the tax information API is contained in
+    <code>xTaxRequest.go</code>.</p>
+</body>
+</html>
